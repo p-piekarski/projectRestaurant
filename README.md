@@ -65,3 +65,16 @@ git branch -D nazwabrancha
 9. Wrzucasz wszystko na serwer
 
 git push
+
+
+## Komendy uruchamiające
+Odpala projekt pod adresem http://localhost:3000/
+
+npm node Express.js
+
+Odpala projekt w terminalu
+
+npm run dev
+
+
+
