@@ -2,6 +2,7 @@
 
 
 Konfiguracja wstępna gita
+
 git config --global user.name "John Doe"
 
 git config --global user.email johndoe@example.com
@@ -11,12 +12,15 @@ Klonowanie repozytorium(klonujesz do folderu w którym chcesz mieć projekt)
 git clone https://github.com/p-piekarski/projectRestaurant.git
 
 Wchodzisz do folderu z projektem
+
 cd projectRestaurant
 
 Sprawdzasz na jakim branchu jesteś (musisz byc na masterze)
+
 git checkout
 
 Pobierasz najnowsza wersje projektu
+
 git pull
 
 ## Działanie na branchach. 
