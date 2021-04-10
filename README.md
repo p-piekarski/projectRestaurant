@@ -7,6 +7,7 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 
 Klonowanie repozytorium(klonujesz do folderu w którym chcesz mieć projekt)
+
 git clone https://github.com/p-piekarski/projectRestaurant.git
 
 Wchodzisz do folderu z projektem
