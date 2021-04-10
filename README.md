@@ -59,7 +59,9 @@ git merge nazwabrancha
 git log --graph --decorate --all --oneline
 
 8. Usuwasz swojego brancha
+
 git branch -D nazwabrancha
 
 9. Wrzucasz wszystko na serwer
+
 git push
