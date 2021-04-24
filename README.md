@@ -1,3 +1,21 @@
+## Komendy uruchamiające
+
+npm install
+
+instaluje zależnośći
+
+
+npm start
+
+Odpala projekt pod adresem http://localhost:3000/
+
+
+
+https://www.postman.com/
+
+do testowania api
+
+
 # projectRestaurant
 
 
@@ -67,10 +85,7 @@ git branch -D nazwabrancha
 git push
 
 
-## Komendy uruchamiające
-Odpala projekt pod adresem http://localhost:3000/
 
-npm start
 
 
 
