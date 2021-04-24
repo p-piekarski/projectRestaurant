@@ -70,11 +70,8 @@ git push
 ## Komendy uruchamiające
 Odpala projekt pod adresem http://localhost:3000/
 
-npm node Express.js
+npm start
 
-Odpala projekt w terminalu
-
-npm run dev
 
 
 
