@@ -1,14 +1,13 @@
 ## Komendy uruchamiające
 
 docker-compose up -d
-    instaluje server mysql na porcie 3307
+# instaluje server mysql na porcie 3307
 
 npm install
-    instaluje zależnośći
-
+# instaluje zależnośći
 
 npm start
-    Odpala projekt pod adresem http://localhost:3000/
+# Odpala projekt pod adresem http://localhost:3000/
 
 
 
