@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      orderIt:{type: Sequelize.INTEGER},
+      orderId:{type: Sequelize.INTEGER},
       itemId:{type: Sequelize.INTEGER},
       price:{type: Sequelize.INTEGER}
     });
