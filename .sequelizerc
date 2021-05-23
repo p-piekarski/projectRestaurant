@@ -5,4 +5,8 @@ module.exports = {
   "models-path": path.resolve("src", "models"),
   "seeders-path": path.resolve("database", "seeders"),
   "migrations-path": path.resolve("database", "migrations"),
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> d44607124b08d0ffa3f7e15c1cb1f36f385909fa
