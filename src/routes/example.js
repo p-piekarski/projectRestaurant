@@ -1,5 +1,56 @@
 import { ExampleService } from "../services/example.js";
 
+export const getDishes = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getDishesId = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getTables = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getCurrencies = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getOrders = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getOrderId = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getCompletion_time = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const getReports = (req, res) => {
+    return res.json({ data: "get example" });
+};
+
+export const postOrder = (req, res) => {
+    return res.json({ data: "post example" });
+};
+
+export const patchOrders = (req, res) => {
+    return res.json({ data: "patch example" });
+};
+
+export const patchOrderId = (req, res) => {
+    return res.json({ data: "patch example" });
+};
+
+export const patchStatus_change = (req, res) => {
+    return res.json({ data: "patch example" });
+};
+
+
+
+
 export const getExample = async (req, res) => {
     const { params } = req;
     if (!params?.id) return res.json({ data: [] });

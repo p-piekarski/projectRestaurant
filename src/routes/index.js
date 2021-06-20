@@ -1,11 +1,19 @@
 import { getStatus } from "./status.js";
 
 import {
-    deleteExample,
-    getExample,
-    getExamples,
-    patchExample,
-    postExample,
+    getDishes,
+    getDishesId,
+    getTables,
+    getCurrencies,
+    getOrders,
+    getOrderId,
+    getCompletion_time,
+    getReports,
+    postOrder,
+    patchOrders,
+    patchOrderId,
+    patchStatus_change
+}
 } from "./example.js";
 
 export default [
@@ -18,26 +26,61 @@ export default [
     {
         method: "GET",
         path: "/example/all",
-        cbs: [getExamples],
+        cbs: [getDishes],
     },
     {
         method: "GET",
         path: "/example/:id",
-        cbs: [getExample],
+        cbs: [getDishesId],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getTables],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getCurrencies],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getOrders],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getCompletion_time],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getReports],
+    },
+    {
+        method: "GET",
+        path: "/example/:id",
+        cbs: [getOrderId],
     },
     {
         method: "POST",
         path: "/example",
-        cbs: [postExample],
+        cbs: [postOrder],
     },
     {
         method: "PATCH",
         path: "/example",
-        cbs: [patchExample],
+        cbs: [patchOrders],
     },
     {
-        method: "DELETE",
-        path: "/example/:id",
-        cbs: [deleteExample],
+        method: "PATCH",
+        path: "/example",
+        cbs: [patchOrderId],
+    },
+    {
+        method: "PATCH",
+        path: "/example",
+        cbs: [patchStatus_change],
     },
 ];
