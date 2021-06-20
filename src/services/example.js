@@ -1,3 +1,9 @@
+export const createExample = () => {};
+export const readExample = () => {};
+export const readExamples = () => {};
+export const updateExample = () => {};
+export const deleteExample = () => {};
+
 import {
     getAllExample,
     getOneExample,
