@@ -10,7 +10,7 @@ import {
     deleteExample,
     createExample,
     updateExample,
-} from "../models/example.js";
+} from "../models/menuitems.js";
 
 export const ExampleService = {
     read: async (id) => (await getOneExample({ where: { id } })) || null,

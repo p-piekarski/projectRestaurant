@@ -1,24 +1,21 @@
 import { Sequelize } from "sequelize";
 import databaseProvider from "../DatabaseProvider.js";
 
-const MODEL_NAME = "example";
+const MODEL_NAME = "tables";
 
 databaseProvider.defineModel(
     MODEL_NAME,
     {
-        id: {
-            type: Sequelize.DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
+        tableId: {
+          type: Sequelize.DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
         },
-        name: {
-            type: Sequelize.DataTypes.STRING,
-            unique: true,
-        },
-        data: {
-            type: Sequelize.DataTypes.STRING,
+        isFree: {
+          type: Sequelize.DataTypes.BOOLEAN,
         },
     },
+        
     {
         timestamps: false,
     }

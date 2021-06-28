@@ -13,8 +13,7 @@ import {
     patchOrders,
     patchOrderId,
     patchStatus_change
-}
-} from "./example.js";
+}from "./example.js";
 
 export default [
     {
