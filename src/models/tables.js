@@ -21,17 +21,17 @@ databaseProvider.defineModel(
     }
 );
 
-export const getOneExample = async (options) =>
+export const getOneTables = async (options) =>
     databaseProvider.getOne(MODEL_NAME, options);
 
-export const getAllExample = async () =>
+export const getAllTables = async () =>
     databaseProvider.getAll(MODEL_NAME);
 
-export const createExample = async (options) =>
+export const createTables = async (options) =>
     databaseProvider.create(MODEL_NAME, options);
 
-export const updateExample = async (condition, fieldsToUpdate) =>
+export const updateTables = async (condition, fieldsToUpdate) =>
     databaseProvider.update(MODEL_NAME, condition, fieldsToUpdate);
 
-export const deleteExample = async (condition) =>
+export const deleteTables = async (condition) =>
     databaseProvider.delete(MODEL_NAME, condition);

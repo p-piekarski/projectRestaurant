@@ -26,17 +26,17 @@ databaseProvider.defineModel(
     }
 );
 
-export const getOneExample = async (options) =>
+export const getOneOrderItems = async (options) =>
     databaseProvider.getOne(MODEL_NAME, options);
 
-export const getAllExample = async () =>
+export const getAllOrderItems = async () =>
     databaseProvider.getAll(MODEL_NAME);
 
-export const createExample = async (options) =>
+export const createOrderItems = async (options) =>
     databaseProvider.create(MODEL_NAME, options);
 
-export const updateExample = async (condition, fieldsToUpdate) =>
+export const updateOrderItems = async (condition, fieldsToUpdate) =>
     databaseProvider.update(MODEL_NAME, condition, fieldsToUpdate);
 
-export const deleteExample = async (condition) =>
+export const deleteOrderItems = async (condition) =>
     databaseProvider.delete(MODEL_NAME, condition);

@@ -31,17 +31,17 @@ databaseProvider.defineModel(
     }
 );
 
-export const getOneExample = async (options) =>
+export const getOneOrders = async (options) =>
     databaseProvider.getOne(MODEL_NAME, options);
 
-export const getAllExample = async () =>
+export const getAllOrders = async () =>
     databaseProvider.getAll(MODEL_NAME);
 
-export const createExample = async (options) =>
+export const createOrders = async (options) =>
     databaseProvider.create(MODEL_NAME, options);
 
-export const updateExample = async (condition, fieldsToUpdate) =>
+export const updateOrders = async (condition, fieldsToUpdate) =>
     databaseProvider.update(MODEL_NAME, condition, fieldsToUpdate);
 
-export const deleteExample = async (condition) =>
+export const deleteOrders = async (condition) =>
     databaseProvider.delete(MODEL_NAME, condition);
