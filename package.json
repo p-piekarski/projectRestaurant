@@ -1,13 +1,12 @@
 {
   "name": "restauracja",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/index.cjs",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test-api": "cross-env NODE_ENV=test nodemon src/index.js",
     "tests": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --maxWorkers=1 --watch",
-    "prepare": "husky install",
     "lint": "eslint src"
   },
   "author": "23807, 23781, 23791, 23642, 23770",
@@ -34,8 +33,7 @@
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0",
     "util": "^0.12.3",
-    "utils": "^0.3.1",
-    "yarn": "^1.22.10"
+    "utils": "^0.3.1"
   },
   "description": "Konfiguracja wstępna gita",
   "repository": {

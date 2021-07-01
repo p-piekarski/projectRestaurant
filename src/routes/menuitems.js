@@ -1,4 +1,4 @@
-import { MenuItemsService } from "../services/menuitems";
+import { MenuItemsService } from "../services/menuitems.js";
 
 export const getOneMenuItems = async (req, res) => {
     const { params } = req;
@@ -12,10 +12,10 @@ export const getAllMenuItems  = async (req, res) => {
 
 export const postMenuItems = async (req, res) => {
     const { body } = req;
-    const { id, name, data } = body || {};
+    const { name, price } = body || {};
 
     try {
-        await MenuItemsService.create(id, name, data);
+        await MenuItemsService.create(name, price);
         res.status(201);
     } catch (err) {
         res.status(500);

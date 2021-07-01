@@ -10,7 +10,6 @@ module.exports = {
         autoIncrement: true
 
       },
-      startDate:{type: Sequelize.DATE},
       totalPrice:{type: Sequelize.INTEGER},
       tableId:{type: Sequelize.INTEGER},
       completionTime:{type: Sequelize.INTEGER},

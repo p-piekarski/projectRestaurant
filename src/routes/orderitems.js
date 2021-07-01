@@ -1,13 +1,14 @@
 import { OrderItemsService } from "../services/orderitems";
 
+
+export const getAllOrderItems  = async (req, res) => {
+    return res.json({ data: await OrderItemsService.readAll() });
+};
+
 export const getOneOrderItems = async (req, res) => {
     const { params } = req;
     if (!params?.id) return res.json({ data: [] });
     return res.json({ data: await OrderItemsService.read(params.id) });
-};
-
-export const getAllOrderItems  = async (req, res) => {
-    return res.json({ data: await OrderItemsService.readAll() });
 };
 
 export const postMenuItems = async (req, res) => {

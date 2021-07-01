@@ -11,9 +11,6 @@ databaseProvider.defineModel(
           primaryKey: true,
           autoIncrement: true
         },
-        startDate: {
-          type: Sequelize.DataTypes.DATE,
-        },
         totalPrice: {
           type: Sequelize.DataTypes.INTEGER,
         },
@@ -27,7 +24,7 @@ databaseProvider.defineModel(
           type: Sequelize.DataTypes.STRING,},
         },
     {
-        timestamps: false,
+        timestamps: true,
     }
 );
 

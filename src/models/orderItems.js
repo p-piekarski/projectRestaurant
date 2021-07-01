@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import databaseProvider from "../DatabaseProvider.js";
 
-const MODEL_NAME = "orderitems";
+const MODEL_NAME = "orderItems";
 
 databaseProvider.defineModel(
     MODEL_NAME,

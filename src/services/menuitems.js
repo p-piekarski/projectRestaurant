@@ -3,20 +3,19 @@ import {
     getOneMenuItems,
     deleteMenuItems,
     createMenuItems,
-    uptadeMenuItems,
+    updateMenuItems,
 } from "../models/menuitems.js";
 
 export const MenuItemsService = {
-    read: async (id) => (await getOneMenuItems({ where: { id } })) || null,
+    read: async (id) => (await getOneMenuItems({ where: { itemId: id } })) || null,
     readAll: async () => (await getAllMenuItems()) || [],
-    create: async (id, name, data) =>
+    create: async (name, price) =>
         await createMenuItems({
-            id,
             name,
-            data: typeof data === "string" ? data : JSON.stringify(data),
+            price
         }),
     update: async (id, fieldsToUpdate) =>
-        await uptadeMenuItems({ where: { id } }, fieldsToUpdate),
+        await updateMenuItems({ where: { id } }, fieldsToUpdate),
     delete: async (id) => await deleteMenuItems({ where: { id } }),
 };
 
