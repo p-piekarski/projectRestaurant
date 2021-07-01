@@ -1,23 +1,24 @@
 import {
   getAllTables,
-  getOneTables,
   deleteTables,
   createTables,
-  uptadeTables,
+  updateTables,
+  getTables
 } from "../models/tables.js";
 
 export const TablesService = {
-  read: async (id) => (await getOneTables({ where: { id } })) || null,
+  readOne: async (id) => (await getTables({ where: {  tableId: id }})) || [],
+  readFirstFree: async (id) => (await getTables({ where: {  isFree: true } , limit: 1})) || null,
   readAll: async () => (await getAllTables()) || [],
-  create: async (id, name, data) =>
+  readAllFree: async () => (await getTables({ where: {  isFree: true }})) || [],
+  create: async (isFree) =>
       await createTables({
-          id,
-          name,
-          data: typeof data === "string" ? data : JSON.stringify(data),
+          isFree
       }),
   update: async (id, fieldsToUpdate) =>
-      await uptadeTables({ where: { id } }, fieldsToUpdate),
-  delete: async (id) => await deleteTables({ where: { id } }),
+      await updateTables({ where: { tableId: id } }, fieldsToUpdate),
+
+  delete: async (id) => await deleteTables({ where: { tableId: id } }),
 };
 
 

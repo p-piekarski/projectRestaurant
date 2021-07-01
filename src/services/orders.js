@@ -3,20 +3,33 @@ import {
     getOneOrders,
     deleteOrders,
     createOrders,
-    uptadeOrders,
+    updateOrders,
 } from "../models/orders.js";
 
+import{OrderItemsService} from "./orderitems.js"
+import{TablesService} from "./tables.js"
+
 export const OrdersService = {
-    read: async (id) => (await getOneOrders({ where: { id } })) || null,
+    read: async (id) => (await getOneOrders({ where: { orderId:id } })) || null,
     readAll: async () => (await getAllOrders()) || [],
-    create: async (id, name, data) =>
+    create: async (currency, tableId = 0, menuItems) =>
         await createOrders({
-            id,
-            name,
-            data: typeof data === "string" ? data : JSON.stringify(data),
+            tableId,
+            currency,
+            menuItems: typeof data === "string" ? data : JSON.stringify(data)
+        }).then(order=>{
+            if(tableId !=0) {TablesService.update(tableId, {isFree: false} );}
+
+            orderId=order.data[0].orderId;
+            await OrderItemsService.saveOrderItems(order.data[0].orderId, menuItems).then(amount=>{
+                await updateOrders({ where: { orderId: orderId } }, {price: amount});
+            });
         }),
+
+        
     update: async (id, fieldsToUpdate) =>
-        await uptadeOrders({ where: { id } }, fieldsToUpdate),
+        await updateOrders({ where: { orderId: id } }, fieldsToUpdate),
+
     delete: async (id) => await deleteOrders({ where: { id } }),
 };
 

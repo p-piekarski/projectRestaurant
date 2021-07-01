@@ -1,21 +1,22 @@
-import { TablesService } from "../services/tables";
+import { TablesService } from "../services/tables.js";
 
-export const getOneTables = async (req, res) => {
-    const { params } = req;
-    if (!params?.id) return res.json({ data: [] });
-    return res.json({ data: await TablesService.read(params.id) });
+export const getFirstFreeTables = async (req, res) => {
+    return res.json({ data: await TablesService.readFirstFree()});
 };
 
 export const getAllTables  = async (req, res) => {
     return res.json({ data: await TablesService.readAll() });
 };
 
+export const getAllFreeTables = async (req, res) => {
+    return res.json({ data: await TablesService.readAllFree()});
+};
+
 export const postTables = async (req, res) => {
     const { body } = req;
-    const { id, name, data } = body || {};
-
+    const { isFree } = body || {};
     try {
-        await TablesService.create(id, name, data);
+        await TablesService.create(isFree);
         res.status(201);
     } catch (err) {
         res.status(500);
@@ -25,14 +26,14 @@ export const postTables = async (req, res) => {
 };
 
 export const patchTables = async (req, res) => {
+    const { params } = req;
+    const { id } = params || {};
     const { body } = req;
-    const { id, name, data } = body || {};
+    const { isFree } = body || {};
+    
 
     const fieldsToUpdate = {};
-    if (name !== undefined) fieldsToUpdate.name = name;
-    if (data !== undefined)
-        fieldsToUpdate.data =
-            typeof data === "string" ? data : JSON.stringify(data);
+    if (isFree !== undefined) fieldsToUpdate.isFree = isFree;
 
     try {
         await TablesService.update(id, fieldsToUpdate);

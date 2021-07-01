@@ -1,4 +1,5 @@
 import { OrdersService } from "../services/orders";
+import { TablesService } from "../services/tables.js";
 
 export const getOneOrders = async (req, res) => {
     const { params } = req;
@@ -12,30 +13,43 @@ export const getAllOrders  = async (req, res) => {
 
 export const postOrders = async (req, res) => {
     const { body } = req;
-    const { id, name, data } = body || {};
+    const { tableId, currency, menuItems } = body || {};
+
 
     try {
-        await OrdersService.create(id, name, data);
+        if (tableId !== undefined && tableId !==0)
+            await TablesService.readOne(tableId).then(table=>{
+                if (table.data[0].isFree == true)
+                    await OrdersService.create(tableId,currency,menuItems);
+                else 
+                    throw `Table ${tableId} is already taken, please place another order`;
+            });
+        await OrdersService.create(tableId,currency,menuItems);
         res.status(201);
     } catch (err) {
-        res.status(500);
+        res.status(500).send(err);
     }
 
     return res.send();
 };
 
-export const patchOrders = async (req, res) => {
+export const patchOrdersStatus = async (req, res) => {
     const { body } = req;
-    const { id, name, data } = body || {};
+    const { orderId, status} = body || {};
 
     const fieldsToUpdate = {};
-    if (name !== undefined) fieldsToUpdate.name = name;
-    if (data !== undefined)
-        fieldsToUpdate.data =
-            typeof data === "string" ? data : JSON.stringify(data);
+    if (status !== undefined || status === "opened" || status === "delivered" || status === "closed") 
+        fieldsToUpdate.status = status;
 
     try {
-        await OrdersService.update(id, fieldsToUpdate);
+        await OrdersService.update(orderId, fieldsToUpdate);
+        if (status==='closed'){
+            await OrdersService.read(orderId).then(order=>{
+                tableId=order.data[0].tableId;
+                if(tableId > 0)
+                    await TablesService.update(tableId, {isFree: false});
+            })
+        }
         res.status(200);
     } catch (err) {
         res.status(500);

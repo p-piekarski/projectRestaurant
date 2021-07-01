@@ -25,8 +25,10 @@ export const postMenuItems = async (req, res) => {
 };
 
 export const patchMenuItems = async (req, res) => {
+    const { params } = req;
+    const { id } = params || {};
     const { body } = req;
-    const { id, name, data } = body || {};
+    const { name, data } = body || {};
 
     const fieldsToUpdate = {};
     if (name !== undefined) fieldsToUpdate.name = name;

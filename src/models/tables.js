@@ -7,22 +7,26 @@ databaseProvider.defineModel(
     MODEL_NAME,
     {
         tableId: {
-          type: Sequelize.DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
+            type: Sequelize.DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         isFree: {
-          type: Sequelize.DataTypes.BOOLEAN,
+            type: Sequelize.DataTypes.BOOLEAN,
         },
     },
-        
+
     {
         timestamps: false,
     }
 );
 
-export const getOneTables = async (options) =>
+
+export const getFreeTables = async (options) =>
     databaseProvider.getOne(MODEL_NAME, options);
+
+export const getTables = async (options) =>
+    databaseProvider.getWhere(MODEL_NAME, options);
 
 export const getAllTables = async () =>
     databaseProvider.getAll(MODEL_NAME);

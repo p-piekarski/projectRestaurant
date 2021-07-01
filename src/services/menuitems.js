@@ -15,8 +15,8 @@ export const MenuItemsService = {
             price
         }),
     update: async (id, fieldsToUpdate) =>
-        await updateMenuItems({ where: { id } }, fieldsToUpdate),
-    delete: async (id) => await deleteMenuItems({ where: { id } }),
+        await updateMenuItems({ where: { itemId: id } }, fieldsToUpdate),
+    delete: async (id) => await deleteMenuItems({ where: { itemId: id } }),
 };
 
 

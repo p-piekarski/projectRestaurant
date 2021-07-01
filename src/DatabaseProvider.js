@@ -37,9 +37,15 @@ class DatabaseProvider {
         }
     };
 
+    getWhere = async (modelName, options) => {
+        return await this.models[modelName].findAll(options);
+    };
+
+
     getAll = async (modelName) => {
         return await this.models[modelName].findAll();
     };
+    
 
     getOne = async (modelName, options) => {
         return await this.models[modelName].findOne(options);
