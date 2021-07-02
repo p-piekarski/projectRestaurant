@@ -28,8 +28,9 @@ class DatabaseProvider {
         const t = await this.sequelize.transaction();
 
         try {
-            await cb();
+            const result = await cb();
             await t.commit();
+            return result;
         } catch (error) {
             console.error(error);
             await t.rollback();

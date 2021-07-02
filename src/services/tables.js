@@ -7,10 +7,10 @@ import {
 } from "../models/tables.js";
 
 export const TablesService = {
-  readOne: async (id) => (await getTables({ where: {  tableId: id }})) || [],
-  readFirstFree: async (id) => (await getTables({ where: {  isFree: true } , limit: 1})) || null,
+  readOne: async (id) => (await getTables({ where: {  tableId: id }, raw: true})) || [],
+  readFirstFree: async (id) => (await getTables({ where: {  isFree: true } , limit: 1, raw: true})) || null,
   readAll: async () => (await getAllTables()) || [],
-  readAllFree: async () => (await getTables({ where: {  isFree: true }})) || [],
+  readAllFree: async () => (await getTables({ where: {  isFree: true }, raw: true})) || [],
   create: async (isFree) =>
       await createTables({
           isFree

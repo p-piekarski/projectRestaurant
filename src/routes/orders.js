@@ -7,7 +7,7 @@ export const getOneOrders = async (req, res) => {
     return res.json({ data: await OrdersService.read(params.id) });
 };
 
-export const getAllOrders  = async (req, res) => {
+export const getAllOrders = async (req, res) => {
     return res.json({ data: await OrdersService.readAll() });
 };
 
@@ -17,14 +17,14 @@ export const postOrders = async (req, res) => {
 
 
     try {
-        if (tableId !== undefined && tableId !==0)
-            await TablesService.readOne(tableId).then(async table=>{
-                if (table.data[0].isFree == true)
-                    await OrdersService.create(tableId,currency,menuItems);
-                else 
+        if (tableId !== undefined && tableId !== 0)
+            await TablesService.readOne(tableId).then(async (table) => {
+                console.log(table[0].isFree);
+                if (table[0].isFree !== 1)
                     throw `Table ${tableId} is already taken, please place another order`;
+
             });
-        await OrdersService.create(tableId,currency,menuItems);
+        await OrdersService.create(tableId, currency, menuItems);
         res.status(201);
     } catch (err) {
         res.status(500).send(err);
@@ -35,20 +35,22 @@ export const postOrders = async (req, res) => {
 
 export const patchOrdersStatus = async (req, res) => {
     const { body } = req;
-    const { orderId, status} = body || {};
+    const { orderId, status } = body || {};
 
     const fieldsToUpdate = {};
-    if (status !== undefined || status === "opened" || status === "delivered" || status === "closed") 
+    if (status !== undefined || status === "opened" || status === "delivered" || status === "closed")
         fieldsToUpdate.status = status;
 
     try {
-        if (status==='closed'){
-            await OrdersService.read(orderId).then( order=>{
-                const completionTime= Math.abs(new Date() - order.data[0].createdAt);
-                fieldsToUpdate.completionTime=completionTime;
-                tableId=order.data[0].tableId;
-                if(tableId > 0)
-                    TablesService.update(tableId, {isFree: false});
+        if (status === 'closed') {
+            await OrdersService.read(orderId).then(async (order) => {
+                console.log(order);
+                const completionTime = Math.abs(new Date() - order.createdAt);
+                fieldsToUpdate.completionTime = completionTime;
+                console.log(fieldsToUpdate);
+                const tableId = order.tableId;
+                if (tableId > 0)
+                    await TablesService.update(tableId, { isFree: true });
             })
         }
         await OrdersService.update(orderId, fieldsToUpdate);

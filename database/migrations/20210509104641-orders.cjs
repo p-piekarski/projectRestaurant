@@ -13,7 +13,9 @@ module.exports = {
       totalPrice:{type: Sequelize.INTEGER},
       tableId:{type: Sequelize.INTEGER},
       completionTime:{type: Sequelize.INTEGER},
-      currency:{ type: Sequelize.STRING}
+      currency:{ type: Sequelize.STRING},
+
+
     });
 
   },

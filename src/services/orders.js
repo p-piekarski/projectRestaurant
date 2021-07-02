@@ -10,21 +10,26 @@ import { OrderItemsService } from "./orderitems.js"
 import { TablesService } from "./tables.js"
 
 export const OrdersService = {
-    read: async (id) => (await getOneOrders({ where: { orderId: id } })) || null,
+    read: async (id) => (await getOneOrders({ where: { orderId: id }, raw: true })) || null,
     readAll: async () => (await getAllOrders()) || [],
-    create: async (currency, tableId = 0, menuItems) =>
+    create: async (tableId = 0, currency = "pln", menuItems) => {
+        console.log(tableId, currency, menuItems);
         await createOrders({
             tableId,
             currency,
-            menuItems: typeof data === "string" ? data : JSON.stringify(data)
+            menuItems
         }).then(async (order) => {
-            if (tableId != 0) { TablesService.update(tableId, { isFree: false }); }
+            console.log("step 1");
+            if (tableId != 0) { await TablesService.update(tableId, { isFree: false }); }
 
-            orderId = order.data[0].orderId;
-            await OrderItemsService.saveOrderItems(order.data[0].orderId, menuItems);//.then(async (amount)=>{
-            // await updateOrders({ where: { orderId: orderId } }, {price: amount})
+            const orderId = order.get("orderId");
+            console.log("TO JEST ORDERID: " + orderId)
+            await OrderItemsService.createAll(orderId, menuItems).then(async (amount) => {
+                await updateOrders({ where: { orderId: orderId } }, { totalPrice: amount })
+            });
 
-        }),
+        })
+    },
     update: async (id, fieldsToUpdate) =>
         await updateOrders({ where: { orderId: id } }, fieldsToUpdate),
 
