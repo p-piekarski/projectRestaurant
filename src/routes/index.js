@@ -1,5 +1,7 @@
 import { getStatus } from "./status.js";
-import {authenticate} from "../middlewares/basicAuth.js";
+import { authenticate } from "../middlewares/basicAuth.js";
+
+import { getRate } from "./currency.js";
 
 import {
     postMenuItems,
@@ -19,7 +21,8 @@ import {
 
 import {
     postOrders,
-    patchOrdersStatus
+    patchOrdersStatus,
+    patchOrdersCurrency
 } from "./orders.js";
 
 export default [
@@ -109,7 +112,22 @@ export default [
         method: "PUT",
         path: "/orders/status-change",
         isPublic: false,
-        cbs: [authenticate,patchOrdersStatus],
+        cbs: [authenticate, patchOrdersStatus,],
+    },
+    {
+        method: "PUT",
+        path: "/orders/currency-change",
+        isPublic: false,
+        cbs: [authenticate, patchOrdersCurrency,],
+    },
+
+
+    //currency routes
+    {
+        method: "GET",
+        path: "/currency/:id",
+        isPublic: true,
+        cbs: [getRate],
     },
 
 ];
