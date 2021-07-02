@@ -3,7 +3,7 @@ import {
   getOneOrderItems,
   deleteOrderItems,
   createOrderItems,
-  uptadeOrderItems,
+  updateOrderItems,
 } from "../models/orderitems.js";
 
 export const OrderItemsService = {
@@ -16,7 +16,7 @@ export const OrderItemsService = {
           data: typeof data === "string" ? data : JSON.stringify(data),
       }),
   update: async (id, fieldsToUpdate) =>
-      await uptadeOrderItems({ where: { id } }, fieldsToUpdate),
+      await updadeOrderItems({ where: { id } }, fieldsToUpdate),
   delete: async (id) => await deleteOrderItems({ where: { id } }),
 };
 

@@ -1,4 +1,5 @@
 import { getStatus } from "./status.js";
+import {authenticate} from "../middlewares/basicAuth.js";
 
 import {
     postMenuItems,
@@ -16,12 +17,23 @@ import {
     patchTables
 } from "./tables.js";
 
+import {
+    postOrders,
+    patchOrdersStatus
+} from "./orders.js";
+
 export default [
     {
         method: "GET",
         path: "/status",
         isPublic: true,
         cbs: [getStatus],
+    },
+    {
+        method: "GET",
+        path: "/status",
+        isPublic: false,
+        cbs: [authenticate, getStatus],
     },
     //menuitems routes
     {
@@ -85,6 +97,19 @@ export default [
         path: "/tables/patch/:id",
         isPublic: true,
         cbs: [patchTables],
+    },
+    //orders routes
+    {
+        method: "POST",
+        path: "/orders/place",
+        isPublic: true,
+        cbs: [postOrders],
+    },
+    {
+        method: "PUT",
+        path: "/orders/status-change",
+        isPublic: false,
+        cbs: [authenticate,patchOrdersStatus],
     },
 
 ];

@@ -1,4 +1,4 @@
-import { OrdersService } from "../services/orders";
+import { OrdersService } from "../services/orders.js";
 import { TablesService } from "../services/tables.js";
 
 export const getOneOrders = async (req, res) => {
@@ -18,7 +18,7 @@ export const postOrders = async (req, res) => {
 
     try {
         if (tableId !== undefined && tableId !==0)
-            await TablesService.readOne(tableId).then(table=>{
+            await TablesService.readOne(tableId).then(async table=>{
                 if (table.data[0].isFree == true)
                     await OrdersService.create(tableId,currency,menuItems);
                 else 
@@ -42,14 +42,16 @@ export const patchOrdersStatus = async (req, res) => {
         fieldsToUpdate.status = status;
 
     try {
-        await OrdersService.update(orderId, fieldsToUpdate);
         if (status==='closed'){
-            await OrdersService.read(orderId).then(order=>{
+            await OrdersService.read(orderId).then( order=>{
+                const completionTime= Math.abs(new Date() - order.data[0].createdAt);
+                fieldsToUpdate.completionTime=completionTime;
                 tableId=order.data[0].tableId;
                 if(tableId > 0)
-                    await TablesService.update(tableId, {isFree: false});
+                    TablesService.update(tableId, {isFree: false});
             })
         }
+        await OrdersService.update(orderId, fieldsToUpdate);
         res.status(200);
     } catch (err) {
         res.status(500);

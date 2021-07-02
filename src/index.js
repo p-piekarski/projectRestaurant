@@ -13,7 +13,9 @@ const run = async () => {
             config.options.public_routes_prefix,
             config.options.private_routes_prefix
           );
+          
           server.addRoutes(routes);
+
           server.start(
             config.options.port,
             config.security.key_path,
