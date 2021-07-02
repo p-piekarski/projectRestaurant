@@ -5,7 +5,7 @@ import {
   createOrderItems,
   updateOrderItems,
 } from "../models/orderitems.js";
-import { MenuItemsService } from "./menuItems.js";
+import { MenuItemsService } from "./menuitems.js";
 
 export const OrderItemsService = {
   read: async (id) => (await getOneOrderItems({ where: { id } })) || null,
