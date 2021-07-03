@@ -1,5 +1,8 @@
 import { OrdersService } from "../services/orders.js";
 import { TablesService } from "../services/tables.js";
+import { CurrencyService } from "../services/currency.js";
+import { ReportsService } from "../services/reports.js";
+
 
 export const getOneOrders = async (req, res) => {
     const { params } = req;
@@ -61,6 +64,39 @@ export const patchOrdersStatus = async (req, res) => {
 
     return res.send();
 };
+
+export const patchOrdersCurrency = async (req, res) => {
+    const { body } = req;
+    const { orderId, currency } = body || {};
+    const fieldsToUpdate = {};
+    try {
+        if (currency !== undefined || currency === "usd" || currency === "eur") {
+            fieldsToUpdate.currency = currency;
+            console.log("test1");
+
+            await OrdersService.read(orderId).then(async (order) => {
+                console.log("test2");
+                console.log(order);
+                const rate = await CurrencyService.read(currency);
+                console.log("test3");
+                const totalPrice = Math.floor(order.totalPrice / rate);
+                fieldsToUpdate.totalPrice = totalPrice;
+                console.log(totalPrice);
+                await OrdersService.update(orderId, fieldsToUpdate);
+            })
+
+            res.status(200);
+
+        }
+        else
+            throw "Nieobsługiwana waluta / walute można zmienić tylko raz";
+    } catch (err) {
+        res.status(500).send(err);
+    }
+
+    return res.send();
+};
+
 
 export const deleteOrders = async (req, res) => {
     const { params } = req;

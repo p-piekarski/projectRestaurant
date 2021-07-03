@@ -20,9 +20,11 @@ import {
 } from "./tables.js";
 
 import {
+    getOneOrders,
+    getAllOrders,
     postOrders,
     patchOrdersStatus,
-    patchOrdersCurrency
+    patchOrdersCurrency,
 } from "./orders.js";
 
 export default [
@@ -102,6 +104,18 @@ export default [
         cbs: [patchTables],
     },
     //orders routes
+    {
+        method: "GET",
+        path: "/orders/:id",
+        isPublic: true,
+        cbs: [getOneOrders],
+    },
+    {
+        method: "GET",
+        path: "/orders",
+        isPublic: true,
+        cbs: [getAllOrders],
+    },
     {
         method: "POST",
         path: "/orders/place",

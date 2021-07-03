@@ -25,6 +25,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
+    "git": "^0.1.5",
     "helmet": "^4.6.0",
     "jest": "^27.0.4",
     "lodash": "^4.17.21",
@@ -33,6 +34,7 @@
     "openssl": "^1.1.0",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0",
+    "simple-git": "^2.40.0",
     "util": "^0.12.3",
     "utils": "^0.3.1"
   },
