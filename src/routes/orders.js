@@ -79,7 +79,7 @@ export const patchOrdersCurrency = async (req, res) => {
                 console.log(order);
                 const rate = await CurrencyService.read(currency);
                 console.log("test3");
-                const totalPrice = Math.floor(order.totalPrice / rate);
+                const totalPrice = Math.round(order.totalPrice / rate,4);
                 fieldsToUpdate.totalPrice = totalPrice;
                 console.log(totalPrice);
                 await OrdersService.update(orderId, fieldsToUpdate);
@@ -103,4 +103,26 @@ export const deleteOrders = async (req, res) => {
     const { id } = params || {};
     await OrdersService.delete(id);
     return res.send();
+};
+
+// Generate reports
+export const generateReport = async (req, res) => {
+    const { params } = req;
+    if (!params?.id) return res.json({ data: [] });
+    return res.json(await ReportsService.generate(params.id));
+};
+
+export const generateReportDates = async (req, res) => {
+    const { body } = req;
+    const { startDate, endDate } = body || {};
+    console.log(startDate);
+    try {
+        
+        res.status(200); 
+        return res.json(await ReportsService.generateDates(startDate, endDate)); 
+        
+    } catch (err) {
+        res.status(500).send(err);
+     }
+
 };

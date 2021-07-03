@@ -25,6 +25,8 @@ import {
     postOrders,
     patchOrdersStatus,
     patchOrdersCurrency,
+    generateReport,
+    generateReportDates
 } from "./orders.js";
 
 export default [
@@ -134,6 +136,21 @@ export default [
         isPublic: false,
         cbs: [authenticate, patchOrdersCurrency,],
     },
+
+    //reports routes
+    {
+        method: "GET",
+        path: "/orders/reports/dates",
+        isPublic: true,
+        cbs: [generateReportDates],
+    },
+    {
+        method: "GET",
+        path: "/orders/reports/:id",
+        isPublic: true,
+        cbs: [generateReport],
+    },
+    
 
 
     //currency routes
