@@ -1,21 +1,23 @@
 ## Komendy uruchamiające
 
 
-### instaluje server mysql na porcie 3307
-docker-compose up -d
-
 ### instaluje zależnośći
 npm install
 
+### instaluje server mysql na porcie 3307
+docker-compose up -d
+
+### inicjuje tabele w bazie danych
+npx sequelize db:migrate
+
 ### Odpala projekt pod adresem http://localhost:3000/
-npm start
+npm run dev
 
 
 
-
+###do testowania api
 https://www.postman.com/
 
-do testowania api
 
 
 # projectRestaurant
