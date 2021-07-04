@@ -3,6 +3,7 @@ import config from "config";
 import databaseProvider from "./DatabaseProvider.js";
 import Server from "./Server.js";
 import routes from "./routes/index.js";
+import { MenuItemsService } from "./services/menuitems.js";
 
 const run = async () => {
     try {
@@ -16,12 +17,19 @@ const run = async () => {
           
           server.addRoutes(routes);
 
-          server.start(
+          await server.start(
             config.options.port,
             config.security.key_path,
             config.security.cert_path
           );
-          
+
+          const menuItems = await MenuItemsService.readAll()
+          const menuLength = menuItems.length
+          console.log(menuItems)
+          console.log(menuLength)
+          if (menuLength<12){
+            throw `Incomplete configuration error, menuItems.length:  ${menuLength} < 12`;
+          }
           
 
     } catch (err) {

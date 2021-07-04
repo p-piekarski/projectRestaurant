@@ -12,6 +12,7 @@ import { TablesService } from "./tables.js"
 export const OrdersService = {
     read: async (id) => (await getOneOrders({ where: { orderId: id }, raw: true })) || null,
     readAll: async () => (await getAllOrders()) || [],
+    readWhere: async (options) => (await getOrders(options)) || [],
     create: async (tableId = 0, currency = "pln", menuItems) => {
         console.log(tableId, currency, menuItems);
         await createOrders({

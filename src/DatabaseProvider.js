@@ -44,7 +44,7 @@ class DatabaseProvider {
 
 
     getAll = async (modelName) => {
-        return await this.models[modelName].findAll();
+        return await this.models[modelName].findAll({raw:true});
     };
     
 

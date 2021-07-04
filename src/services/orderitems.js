@@ -4,11 +4,13 @@ import {
   deleteOrderItems,
   createOrderItems,
   updateOrderItems,
+  getOrderItems
 } from "../models/orderitems.js";
 import { MenuItemsService } from "./menuitems.js";
 
 export const OrderItemsService = {
   read: async (id) => (await getOneOrderItems({ where: { id } })) || null,
+  readWhere: async (options) => (await getOrderItems(options)) || [],
   readAll: async () => (await getAllOrderItems()) || [],
   createAll: async (orderId, menuItems) => {
     let amount = 0;

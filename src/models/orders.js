@@ -36,6 +36,9 @@ databaseProvider.defineModel(
 export const getOneOrders = async (options) =>
   databaseProvider.getOne(MODEL_NAME, options);
 
+export const getOrders = async (options) =>
+  databaseProvider.getWhere(MODEL_NAME, options);
+
 export const getAllOrders = async () =>
   databaseProvider.getAll(MODEL_NAME);
 

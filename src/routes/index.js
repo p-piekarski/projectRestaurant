@@ -1,5 +1,7 @@
 import { getStatus } from "./status.js";
-import {authenticate} from "../middlewares/basicAuth.js";
+import { authenticate } from "../middlewares/basicAuth.js";
+
+import { getRate } from "./currency.js";
 
 import {
     postMenuItems,
@@ -18,8 +20,13 @@ import {
 } from "./tables.js";
 
 import {
+    getOneOrders,
+    getAllOrders,
     postOrders,
-    patchOrdersStatus
+    patchOrdersStatus,
+    patchOrdersCurrency,
+    generateReport,
+    generateReportDates
 } from "./orders.js";
 
 export default [
@@ -100,6 +107,18 @@ export default [
     },
     //orders routes
     {
+        method: "GET",
+        path: "/orders/:id",
+        isPublic: true,
+        cbs: [getOneOrders],
+    },
+    {
+        method: "GET",
+        path: "/orders",
+        isPublic: true,
+        cbs: [getAllOrders],
+    },
+    {
         method: "POST",
         path: "/orders/place",
         isPublic: true,
@@ -109,7 +128,37 @@ export default [
         method: "PUT",
         path: "/orders/status-change",
         isPublic: false,
-        cbs: [authenticate,patchOrdersStatus],
+        cbs: [authenticate, patchOrdersStatus,],
+    },
+    {
+        method: "PUT",
+        path: "/orders/currency-change",
+        isPublic: false,
+        cbs: [authenticate, patchOrdersCurrency,],
+    },
+
+    //reports routes
+    {
+        method: "GET",
+        path: "/orders/reports/dates",
+        isPublic: true,
+        cbs: [generateReportDates],
+    },
+    {
+        method: "GET",
+        path: "/orders/reports/:id",
+        isPublic: true,
+        cbs: [generateReport],
+    },
+    
+
+
+    //currency routes
+    {
+        method: "GET",
+        path: "/currency/:id",
+        isPublic: true,
+        cbs: [getRate],
     },
 
 ];

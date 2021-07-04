@@ -7,7 +7,7 @@ import {
 } from "../models/menuitems.js";
 
 export const MenuItemsService = {
-    read: async (id) => (await getOneMenuItems({ where: { itemId: id } })) || null,
+    read: async (id) => (await getOneMenuItems({ where: { itemId: id }, raw: true})) || null,
     readAll: async () => (await getAllMenuItems()) || [],
     create: async (name, price) =>
         await createMenuItems({

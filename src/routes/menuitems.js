@@ -28,14 +28,11 @@ export const patchMenuItems = async (req, res) => {
     const { params } = req;
     const { id } = params || {};
     const { body } = req;
-    const { name, data } = body || {};
+    const { name, price } = body || {};
 
     const fieldsToUpdate = {};
     if (name !== undefined) fieldsToUpdate.name = name;
-    if (data !== undefined)
-        fieldsToUpdate.data =
-            typeof data === "string" ? data : JSON.stringify(data);
-
+    if (price !== undefined) fieldsToUpdate.price = price;
     try {
         await MenuItemsService.update(id, fieldsToUpdate);
         res.status(200);
